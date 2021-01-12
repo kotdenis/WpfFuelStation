@@ -15,20 +15,19 @@ using System.Windows.Shapes;
 using Unity;
 using WpfFuelStation.ViewModels;
 
-namespace WpfFuelStation
+namespace WpfFuelStation.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для FuelPrepareControl.xaml
     /// </summary>
-    public partial class MainWindow : MahApps.Metro.Controls.MetroWindow
+    public partial class FuelPrepareControl : MahApps.Metro.Controls.MetroContentControl
     {
         [Dependency]
         public ViewMain ViewMain
         {
             set => DataContext = value;
         }
-
-        public MainWindow()
+        public FuelPrepareControl()
         {
             InitializeComponent();
         }

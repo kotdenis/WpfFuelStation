@@ -1,0 +1,70 @@
+﻿<metro:MetroWindow x:Class="WpfFuelStation.WayBillWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:converter="clr-namespace:WpfFuelStation.Converters"
+        xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:WpfFuelStation"
+        mc:Ignorable="d"
+        Title="Путевой лист" Height="500" Width="300" WindowTitleBrush="#FF0C0B0B" 
+                   NonActiveWindowTitleBrush="#FF111111" BorderBrush="Black" WindowStartupLocation="CenterScreen">
+    <metro:MetroWindow.Resources>
+        <converter:DateConverter x:Key="dateConverter"></converter:DateConverter>
+    </metro:MetroWindow.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Column="0" Grid.Row="0">
+            <StackPanel Width="261">
+                <Label Content="Номер наладной" FontSize="15" FontWeight="Bold"></Label>
+                <TextBox Text="{Binding WayBillNumber}" FontSize="15"></TextBox>
+                <Label Content="Дата отправления" FontSize="15" FontWeight="Bold"></Label>
+                <!--<TextBox Text="{Binding DepartmentDate}" FontSize="15"></TextBox>-->
+                <DatePicker FontSize="15" Text="{Binding DepartmentDate, Mode=TwoWay, Converter={StaticResource dateConverter}}" Margin="2,0,4,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedDateChanged">
+                            <i:InvokeCommandAction Command="{Binding GetStartDateCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DatePicker>
+                <Label Content="Место отправления" FontSize="15" FontWeight="Bold"></Label>
+                <TextBox Text="{Binding DepartmentPlace}" FontSize="15"></TextBox>
+                <Label Content="Топливо к заправке (литры)" FontSize="15" FontWeight="Bold"></Label>
+                <TextBox Text="{Binding FuelLimit}" FontSize="15"></TextBox>
+                <Label Content="Транспорт" FontSize="15" FontWeight="Bold"></Label>
+                <DockPanel>
+                    <TextBox Text="{Binding Transport}" FontSize="15" Margin="0,0,5,0" Width="226" IsReadOnly="True"></TextBox>
+                    <Viewbox>
+                        <Button  Content="F" Command="{Binding ShowTransportWindowCommand}"></Button>
+                    </Viewbox>
+                </DockPanel>
+                <Label Content="Водитель" FontSize="15" FontWeight="Bold"></Label>
+                <DockPanel>
+                    <TextBox Text="{Binding Driver}" FontSize="15" Margin="0,0,5,0" Width="226" IsReadOnly="True"></TextBox>
+                    <Viewbox>
+                        <Button  Content="F" Command="{Binding ShowDriverWindowCommand}"></Button>
+                    </Viewbox>
+                </DockPanel>
+                <Label Content="Марка топлива" FontSize="15" FontWeight="Bold"></Label>
+                <!--<TextBox Text="{Binding Fuel}" FontSize="15"></TextBox>-->
+                <ComboBox ItemsSource="{Binding FuelMarks}" SelectedValue="{Binding Fuel, Mode=TwoWay}" Margin="0,0,2,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding GetFuelMarkCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <DockPanel>
+                    <Button Content="Сохранить" Width="110" Margin="10" Command="{Binding SaveWayBillCommand}"></Button>
+                    <!--<Button Content="Печать" Width="110" Margin="10" Command="{Binding DeleteDriverCommand}"></Button>-->
+                </DockPanel>
+            </StackPanel>
+        </Viewbox>
+    </Grid>
+</metro:MetroWindow>

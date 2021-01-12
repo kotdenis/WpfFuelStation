@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Unity;
 using WpfFuelStation.ViewModels;
@@ -18,17 +17,16 @@ using WpfFuelStation.ViewModels;
 namespace WpfFuelStation
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для MessageWindow.xaml
     /// </summary>
-    public partial class MainWindow : MahApps.Metro.Controls.MetroWindow
+    public partial class MessageWindow : MahApps.Metro.Controls.MetroWindow
     {
         [Dependency]
-        public ViewMain ViewMain
+        public ViewMessage ViewMessage
         {
             set => DataContext = value;
         }
-
-        public MainWindow()
+        public MessageWindow()
         {
             InitializeComponent();
         }

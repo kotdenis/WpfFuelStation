@@ -12,23 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Unity;
-using WpfFuelStation.ViewModels;
 
-namespace WpfFuelStation
+namespace WpfFuelStation.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ChargingUserControl.xaml
     /// </summary>
-    public partial class MainWindow : MahApps.Metro.Controls.MetroWindow
+    public partial class ChargingUserControl : MahApps.Metro.Controls.MetroContentControl
     {
-        [Dependency]
-        public ViewMain ViewMain
-        {
-            set => DataContext = value;
-        }
-
-        public MainWindow()
+        public ChargingUserControl()
         {
             InitializeComponent();
         }

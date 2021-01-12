@@ -1,0 +1,55 @@
+﻿<metro:MetroWindow x:Class="WpfFuelStation.Controls.DriverTransportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:converter="clr-namespace:WpfFuelStation.Converters"
+        xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:WpfFuelStation.Controls"
+        mc:Ignorable="d"
+        Title="Вспомогательное окно" Height="400" Width="500" WindowTitleBrush="#FF0C0B0B" 
+                   NonActiveWindowTitleBrush="#FF111111" BorderBrush="Black" WindowStartupLocation="CenterScreen">
+    <metro:MetroWindow.Resources>
+        <converter:DateConverter x:Key="dateConverter"></converter:DateConverter>
+        <converter:FormatConverter x:Key="formatConverter"></converter:FormatConverter>
+    </metro:MetroWindow.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.85*"></RowDefinition>
+            <RowDefinition Height="0.15*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" Margin="10" BorderBrush="Black" BorderThickness="2">
+            <DataGrid  FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                      VerticalScrollBarVisibility="Visible" Margin="0" RenderTransformOrigin="0.532,0.503" 
+                      ItemsSource="{Binding ChargeDataModels}" AutoGenerateColumns="False" IsReadOnly="True" 
+                       RowBackground="Thistle"  AlternatingRowBackground="White" 
+                       SelectedIndex="{Binding CurrentId, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Visibility="Hidden" Binding="{Binding WayBillId}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Водитель" Binding="{Binding Driver}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Табельный номер" Binding="{Binding WayBillNumber}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Транспорт" Binding="{Binding Transport}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Гос. номер" Binding="{Binding TransportNamber}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Место отправления" Binding="{Binding DepartmentPlace}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата отправления" Binding="{Binding DepartmentDate, Converter={StaticResource dateConverter}}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Топливо к заправке" Binding="{Binding FuelForCharge}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Марка топлива" Binding="{Binding FuelMark}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер листа" Binding="{Binding WayBillNumber}" ></DataGridTextColumn>
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GetCurrentRowCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </Border>
+        <DockPanel Grid.Column="0" Grid.Row="1">
+            <Button Content="Выбрать" HorizontalAlignment="Right" Margin="0,0,30,0" 
+                    IsEnabled="{Binding IsReady}" Command="{Binding GetChargeInfoCommand}"></Button>
+        </DockPanel>
+    </Grid>
+</metro:MetroWindow>

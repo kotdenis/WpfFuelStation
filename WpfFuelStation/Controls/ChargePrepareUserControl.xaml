@@ -1,0 +1,56 @@
+﻿<metro:MetroContentControl x:Class="WpfFuelStation.Controls.ChargePrepareUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:converter="clr-namespace:WpfFuelStation.Converters"
+             xmlns:local="clr-namespace:WpfFuelStation.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="230">
+    <metro:MetroContentControl.Resources>
+        <Image Source="new_white.png" Stretch="Uniform"  x:Key="img"></Image>
+        <Image Source="new_white.png" Stretch="Uniform"  x:Key="img2"></Image>
+    </metro:MetroContentControl.Resources>
+    <Grid>
+        <StackPanel Margin="5">
+            <Label Content="Транспорт" FontWeight="Bold" FontSize="15"></Label>
+            <DockPanel>
+                <TextBox Width="195"  Text="{Binding Transport}" IsReadOnly="True"></TextBox>
+                <!--<Viewbox>
+                    <Button  Content="D" Margin="10,0,0,0" Command="{Binding ShowGuideWindowCommand}" 
+                             ToolTip="Выбор данных для заправки"></Button>
+                </Viewbox>-->
+            </DockPanel>
+            <Label Content="Табельный номер" FontWeight="Bold" FontSize="15" Margin="0,20,0,0"></Label>
+            <DockPanel>
+                <TextBox Width="195" Text="{Binding ServiceNumber}" IsReadOnly="True"></TextBox>
+            </DockPanel>
+            <Label Content="Топливо к заливу (литры)" FontWeight="Bold" FontSize="15" Margin="0,20,0,0"></Label>
+            <DockPanel>
+                <TextBox Width="195" Text="{Binding FuelLimit}" IsReadOnly="True"></TextBox>
+            </DockPanel>
+            <Label Content="Марка топлива" FontWeight="Bold" FontSize="15" Margin="0,20,0,0"></Label>
+            <TextBox Width="195" Text="{Binding FuelMark}" IsReadOnly="True"></TextBox>
+            <!--<ComboBox ItemsSource="{Binding FuelMarks}" SelectedValue="{Binding FuelMark, Mode=TwoWay}" Text="{Binding FuelMark, Mode=TwoWay}" Margin="13,0" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GetFuelMarkCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>-->
+            <DockPanel Margin="20,50,10,20" >
+                <Button Content="Выбрать" FontSize="12" FontWeight="Bold" Height="35" Margin="0,0,10,0"
+                    Command="{Binding ShowDriverHelperWindowCommand}"></Button>
+                <Button Content="Принять" FontSize="12" FontWeight="Bold" Height="35" Margin="0,0,10,0"
+                    Command="{Binding AcceptBeforeChargingCommand}" Width="93"></Button>
+                <!--<Viewbox>
+                    <Button  Content="D"  Command="{Binding ShowGuideWindowCommand}" 
+                             ToolTip="Выбор данных для заправки"></Button>
+                </Viewbox>-->
+            </DockPanel>
+        </StackPanel>
+
+    </Grid>
+</metro:MetroContentControl>

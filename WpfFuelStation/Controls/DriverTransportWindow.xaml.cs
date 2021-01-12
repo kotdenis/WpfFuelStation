@@ -10,25 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Unity;
 using WpfFuelStation.ViewModels;
 
-namespace WpfFuelStation
+namespace WpfFuelStation.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для DriverTransportWindow.xaml
     /// </summary>
-    public partial class MainWindow : MahApps.Metro.Controls.MetroWindow
+    public partial class DriverTransportWindow : MahApps.Metro.Controls.MetroWindow
     {
         [Dependency]
-        public ViewMain ViewMain
+        public DriverHelperView DriverView
         {
             set => DataContext = value;
         }
-
-        public MainWindow()
+        public DriverTransportWindow()
         {
             InitializeComponent();
         }

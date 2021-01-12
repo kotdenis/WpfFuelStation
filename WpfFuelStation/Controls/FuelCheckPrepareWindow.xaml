@@ -1,0 +1,48 @@
+﻿<metro:MetroWindow x:Class="WpfFuelStation.Controls.FuelCheckPrepareWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:converter="clr-namespace:WpfFuelStation.Converters"
+        xmlns:local="clr-namespace:WpfFuelStation.Controls"
+        mc:Ignorable="d"
+        Title="Подготовка отчета" Height="310" Width="250" WindowTitleBrush="#FF0C0B0B" 
+                   NonActiveWindowTitleBrush="#FF111111" BorderBrush="Black" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <metro:MetroWindow.Resources>
+        <converter:DateConverter x:Key="dateConverter"></converter:DateConverter>
+        <converter:FormatConverter x:Key="formatConverter"></converter:FormatConverter>
+    </metro:MetroWindow.Resources>
+    <Grid>
+        <StackPanel Margin="10">
+            <Label Content="Дата от:"></Label>
+            <DatePicker FontSize="15" Width="210" Text="{Binding StartDate, Mode=TwoWay, Converter={StaticResource dateConverter}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedDateChanged">
+                        <i:InvokeCommandAction Command="{Binding GetStartDateCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DatePicker>
+            <Label Content="Дата до:"></Label>
+            <DatePicker FontSize="15" Width="210" Text="{Binding EndDate, Mode=TwoWay, Converter={StaticResource dateConverter}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedDateChanged">
+                        <i:InvokeCommandAction Command="{Binding GetEndDateCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DatePicker>
+            <Label Content="Марка топлива:"></Label>
+            <ComboBox ItemsSource="{Binding FuelMarks}" SelectedValue="{Binding FuelMark, Mode=TwoWay}" 
+                             Margin="0,10,0,0" Text="{Binding FuelMark, Mode=TwoWay}" Width="210" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GetCurrentRowIdCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <Button Content="Выбрать" Margin="0,50,20,0" Width="100" HorizontalAlignment="Right" 
+                    Command="{Binding ShowFuelReportCommand}"></Button>
+        </StackPanel>
+    </Grid>
+</metro:MetroWindow>
